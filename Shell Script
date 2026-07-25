@@ -1,1 +1,10 @@
+#!/bin/bash
 
+URL="https://raw.githubusercontent.com/datasets/s-and-p-500-companies/refs/heads/main/data/constituents.csv"
+
+curl -s "$URL" | awk -F',' '
+NR==1 {next}
+{
+    print $2 "," $4 "," $5
+}
+' | sort -t',' -k3,3n
